@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
-// const { debug } = require("./middlewares/debug")
+const { debug } = require("./middlewares/debug")
 const router = express.Router()
 
 // const { port, mongoURL } = require('./utils/config')
@@ -21,15 +21,16 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/azimutoDB
     }
 })
 
+const port = process.env.PORT || 8080
+
 const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.static("./public"))
-// app.use(debug)
+app.use(debug)
 
 
 // const port = PORT || 8080
-const port = process.env.PORT || 8080
 
 
 
